@@ -1,6 +1,7 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { CreateProfessorDTO, UpdateProfessorDTO } from './dto/professor.dto';
+import { cryptPassword } from 'src/utils/bcrypt';
 
 @Injectable()
 export class ProfessorService {
@@ -22,8 +23,13 @@ export class ProfessorService {
         HttpStatus.CONFLICT,
       );
     }
+
     const professor = await this.prisma.professor.create({
-      data,
+      data: {
+        nomeCompleto: data.nomeCompleto,
+        email: data.email,
+        senhaHash: await cryptPassword(data.senhaHash),
+      },
     });
     return professor;
   }
