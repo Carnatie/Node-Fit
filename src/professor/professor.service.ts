@@ -34,12 +34,21 @@ export class ProfessorService {
     return professor;
   }
   async acharProfessores() {
-    return await this.prisma.professor.findMany();
+    return await this.prisma.professor.findMany({
+      select: {
+        nomeCompleto: true,
+        email: true,
+      },
+    });
   }
   async acharUmProfessor(id: number) {
     const acharProfessor = await this.prisma.professor.findUnique({
       where: {
         id: Number(id),
+      },
+      select: {
+        nomeCompleto: true,
+        email: true,
       },
     });
 
@@ -103,5 +112,14 @@ export class ProfessorService {
       },
     });
     return HttpStatus.ACCEPTED;
+  }
+
+  async acharEmailProfessor(email: string) {
+    const acharProfessor = await this.prisma.professor.findUnique({
+      where: {
+        email: email,
+      },
+    });
+    return acharProfessor;
   }
 }
