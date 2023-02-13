@@ -1,5 +1,5 @@
 export interface ProfessorPayload {
-  id: number;
+  sub: number;
   email: string;
   name: string;
   iat?: number;

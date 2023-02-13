@@ -15,7 +15,7 @@ export class AuthService {
   async login(username: string): Promise<UserToken> {
     const professor = await this.professorService.acharEmailProfessor(username);
     const payload: ProfessorPayload = {
-      id: professor.id,
+      sub: professor.id,
       email: professor.email,
       name: professor.nomeCompleto,
     };

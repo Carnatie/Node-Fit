@@ -6,9 +6,11 @@ import {
   Param,
   Post,
   Put,
+  UseGuards,
 } from '@nestjs/common';
 import { ProfessorService } from './professor.service';
 import { CreateProfessorDTO, UpdateProfessorDTO } from './dto/professor.dto';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('professor')
 export class ProfessorController {
@@ -20,6 +22,7 @@ export class ProfessorController {
   }
 
   @Get()
+  @UseGuards(JwtAuthGuard)
   async obterProfessores() {
     return this.professorService.acharProfessores();
   }
