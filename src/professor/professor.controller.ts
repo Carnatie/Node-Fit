@@ -9,9 +9,12 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ProfessorService } from './professor.service';
-import { CreateProfessorDTO, UpdateProfessorDTO } from './dto/professor.dto';
+import { UpdateProfessorDTO } from './professor.dto';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { ApiTags } from '@nestjs/swagger';
+import { CreateProfessorDTO } from 'src/auth/auth.dto';
 
+@ApiTags('Professor')
 @Controller('professor')
 export class ProfessorController {
   constructor(private readonly professorService: ProfessorService) {}

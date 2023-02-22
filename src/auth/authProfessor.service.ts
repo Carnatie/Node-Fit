@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { ProfessorService } from 'src/professor/professor.service';
 import * as bcrypt from 'bcrypt';
-import { ProfessorPayload } from './dto/userPayload.dto';
+import { ProfessorPayload, UserToken } from './auth.interface';
 import { JwtService } from '@nestjs/jwt';
-import { UserToken } from './dto/userToken.dto';
 
 @Injectable()
 export class AuthService {
@@ -26,7 +25,7 @@ export class AuthService {
     };
   }
 
-  async validateUser(username: string, password: string) {
+  async validateProfessor(username: string, password: string) {
     const professor = await this.professorService.acharEmailProfessor(username);
     if (professor) {
       const isSenhaHashwordValid = await bcrypt.compare(

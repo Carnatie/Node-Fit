@@ -1,7 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
-import { CreateProfessorDTO, UpdateProfessorDTO } from './dto/professor.dto';
+import { UpdateProfessorDTO } from './professor.dto';
 import { cryptPassword } from 'src/utils/bcrypt';
+import { CreateProfessorDTO } from 'src/auth/auth.dto';
 
 @Injectable()
 export class ProfessorService {
