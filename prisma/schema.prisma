@@ -14,6 +14,28 @@ model Professor {
   senhaHash    String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+  Alunos       Aluno[]
+  role         Role     @default(Professor)
 
   @@map("professores")
 }
+
+model Aluno {
+  id                   Int       @id @default(autoincrement())
+  nomeCompleto         String
+  email                String    @unique
+  senhaHash            String
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  professor            Professor @relation(fields: [professorId], references: [id])
+  professorId          Int
+  role                 Role      @default(Aluno)
+
+  @@map("alunos")
+}
+
+enum Role {
+  Professor
+  Aluno
+}
+
