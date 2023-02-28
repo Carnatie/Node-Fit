@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { ProfessorService } from 'src/professor/professor.service';
 import * as bcrypt from 'bcrypt';
-import { ProfessorPayload, UserToken } from './auth.interface';
+import { ProfessorPayload, ProfessorToken } from './auth.interface';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
@@ -11,7 +11,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async login(username: string): Promise<UserToken> {
+  async login(username: string): Promise<ProfessorToken> {
     const professor = await this.professorService.acharEmailProfessor(username);
     const payload: ProfessorPayload = {
       sub: professor.id,

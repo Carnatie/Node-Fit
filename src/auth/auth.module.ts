@@ -6,9 +6,11 @@ import { AuthController } from './auth.controller';
 import { ProfessorModule } from 'src/professor/professor.module';
 import { JwtModule } from '@nestjs/jwt/dist';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { AlunoModule } from 'src/aluno/aluno.module';
 
 @Module({
   imports: [
+    AlunoModule,
     ProfessorModule,
     PassportModule,
     JwtModule.register({
