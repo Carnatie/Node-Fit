@@ -6,6 +6,6 @@ import { PrismaService } from 'prisma/prisma.service';
 @Module({
   controllers: [AlunoController],
   providers: [AlunoService, PrismaService],
-  exports: [AlunoService],
+  exports: [AlunoService, AlunoModule],
 })
 export class AlunoModule {}

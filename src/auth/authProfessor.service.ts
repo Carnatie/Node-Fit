@@ -5,7 +5,7 @@ import { ProfessorPayload, ProfessorToken } from './auth.interface';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
-export class AuthService {
+export class AuthProfessorService {
   constructor(
     private professorService: ProfessorService,
     private jwtService: JwtService,
@@ -18,7 +18,6 @@ export class AuthService {
       email: professor.email,
       name: professor.nomeCompleto,
     };
-
     const jwtToken = this.jwtService.sign(payload);
     return {
       access_token: jwtToken,

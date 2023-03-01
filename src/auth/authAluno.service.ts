@@ -4,10 +4,10 @@ import { CreateAlunoDTO } from './auth.dto';
 import { cryptPassword } from 'src/utils/bcrypt';
 
 @Injectable()
-export class AlunoService {
+export class AuthAlunoService {
   constructor(private prisma: PrismaService) {}
 
-  async registrarAluno(data: CreateAlunoDTO, req) {
+  async registrarAluno(data: CreateAlunoDTO, req: number) {
     const verificaEmail = await this.prisma.aluno.findUnique({
       where: {
         email: data.email,
@@ -29,7 +29,7 @@ export class AlunoService {
         nomeCompleto: data.nomeCompleto,
         email: data.email,
         senhaHash: await cryptPassword(data.senhaHash),
-        professor: req.sub, // precisa arrumar
+        professor: { connect: { id: Number(req) } },
       },
     });
     return aluno;

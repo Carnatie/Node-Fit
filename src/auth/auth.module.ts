@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { AuthService } from './authProfessor.service';
+import { AuthProfessorService } from './authProfessor.service';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './strategies/local.strategy';
 import { AuthController } from './auth.controller';
@@ -7,6 +7,8 @@ import { ProfessorModule } from 'src/professor/professor.module';
 import { JwtModule } from '@nestjs/jwt/dist';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { AlunoModule } from 'src/aluno/aluno.module';
+import { AuthAlunoService } from './authAluno.service';
+import { PrismaService } from 'prisma/prisma.service';
 
 @Module({
   imports: [
@@ -18,7 +20,13 @@ import { AlunoModule } from 'src/aluno/aluno.module';
       signOptions: { expiresIn: '7d' },
     }),
   ],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [
+    AuthProfessorService,
+    AuthAlunoService,
+    PrismaService,
+    LocalStrategy,
+    JwtStrategy,
+  ],
   controllers: [AuthController],
 })
 export class AuthModule {}

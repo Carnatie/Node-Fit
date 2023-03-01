@@ -31,11 +31,13 @@ export class ProfessorController {
   }
 
   @Get(':id')
+  @UseGuards(JwtAuthGuard)
   async obterUmProfessor(@Param('id') id: number) {
     return this.professorService.acharUmProfessor(id);
   }
 
   @Put(':id')
+  @UseGuards(JwtAuthGuard)
   async atualizarProfessor(
     @Param('id') id: number,
     @Body() data: UpdateProfessorDTO,
@@ -44,6 +46,7 @@ export class ProfessorController {
   }
 
   @Delete(':id')
+  @UseGuards(JwtAuthGuard)
   async apagarProfessor(@Param('id') id: number) {
     return this.professorService.apagarProfessor(id);
   }
