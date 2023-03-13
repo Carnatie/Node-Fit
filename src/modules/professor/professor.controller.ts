@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 import { ProfessorService } from './professor.service';
 import { UpdateProfessorDTO } from './professor.dto';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Professor')

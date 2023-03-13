@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
-import { ProfessorService } from 'src/professor/professor.service';
+import { ProfessorService } from 'src/modules/professor/professor.service';
 import * as bcrypt from 'bcrypt';
 import { ProfessorPayload, ProfessorToken } from './auth.interface';
 import { JwtService } from '@nestjs/jwt';
