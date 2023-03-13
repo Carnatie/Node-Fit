@@ -15,7 +15,7 @@ model Professor {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   Alunos       Aluno[]
-  role         Role     @default(Professor)
+  roles        Role     @default(Professor)
 
   @@map("professores")
 }
@@ -29,7 +29,7 @@ model Aluno {
   updatedAt            DateTime  @updatedAt
   professor            Professor @relation(fields: [professorId], references: [id])
   professorId          Int
-  role                 Role      @default(Aluno)
+  roles                Role      @default(Aluno)
 
   @@map("alunos")
 }

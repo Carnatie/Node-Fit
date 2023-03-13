@@ -1,39 +1,11 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { PrismaService } from 'prisma/prisma.service';
 import { UpdateProfessorDTO } from './professor.dto';
-import { cryptPassword } from 'src/utils/bcrypt';
-import { CreateProfessorDTO } from 'src/auth/auth.dto';
 
 @Injectable()
 export class ProfessorService {
   constructor(private prisma: PrismaService) {}
 
-  async criarProfessor(data: CreateProfessorDTO) {
-    const verificaEmail = await this.prisma.professor.findUnique({
-      where: {
-        email: data.email,
-      },
-    });
-
-    if (verificaEmail) {
-      throw new HttpException(
-        {
-          status: HttpStatus.CONFLICT,
-          error: 'E-mail ja cadastrado',
-        },
-        HttpStatus.CONFLICT,
-      );
-    }
-
-    const professor = await this.prisma.professor.create({
-      data: {
-        nomeCompleto: data.nomeCompleto,
-        email: data.email,
-        senhaHash: await cryptPassword(data.senhaHash),
-      },
-    });
-    return professor;
-  }
   async acharProfessores() {
     return await this.prisma.professor.findMany({
       select: {
@@ -116,7 +88,7 @@ export class ProfessorService {
   }
 
   async acharEmailProfessor(email: string) {
-    const acharProfessor = await this.prisma.professor.findUnique({
+    const acharProfessor = await this.prisma.professor.findFirst({
       where: {
         email: email,
       },
