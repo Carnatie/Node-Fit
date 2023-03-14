@@ -11,7 +11,7 @@ import { AuthAlunoService } from './authAluno.service';
 import { HttpStatus } from '@nestjs/common/enums';
 import { Public } from './decorators/is-public.decorator';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { CreateAlunoDTO, CreateProfessorDTO } from './auth.dto';
+import { CreateAlunoDTO } from './auth.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { Role } from './enums/role.enum';
 import { Roles } from './decorators/roles.decorator';
@@ -24,11 +24,6 @@ export class AuthController {
     private readonly authProfessorService: AuthProfessorService,
     private readonly authAlunoService: AuthAlunoService,
   ) {}
-
-  @Post()
-  async criarProfessor(@Body() data: CreateProfessorDTO) {
-    return this.authProfessorService.registrarProfessor(data);
-  }
 
   @Post('professor/login')
   @Public()

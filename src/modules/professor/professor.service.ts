@@ -14,6 +14,7 @@ export class ProfessorService {
       },
     });
   }
+
   async acharUmProfessor(id: number) {
     const acharProfessor = await this.prisma.professor.findUnique({
       where: {
@@ -79,11 +80,7 @@ export class ProfessorService {
       );
     }
 
-    await this.prisma.professor.delete({
-      where: {
-        id: Number(id),
-      },
-    });
+    await this.prisma.professor.delete({ where: { id: Number(id) } });
     return HttpStatus.ACCEPTED;
   }
 
