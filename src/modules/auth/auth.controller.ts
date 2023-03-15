@@ -11,7 +11,7 @@ import { AuthAlunoService } from './authAluno.service';
 import { HttpStatus } from '@nestjs/common/enums';
 import { Public } from './decorators/is-public.decorator';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { CreateAlunoDTO } from './auth.dto';
+import { CreateAlunoDTO, CreateProfessorDTO } from './auth.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { Role } from './enums/role.enum';
 import { Roles } from './decorators/roles.decorator';
@@ -32,6 +32,12 @@ export class AuthController {
   @RateLimit(10)
   login(@Request() req) {
     return this.authProfessorService.login(req.body.email);
+  }
+
+  @Post('registrarProfessor')
+  @Public()
+  async registrarProfessor(@Body() data: CreateProfessorDTO) {
+    return this.authProfessorService.registrarProfessor(data);
   }
 
   @Post('professor/registrarAluno')

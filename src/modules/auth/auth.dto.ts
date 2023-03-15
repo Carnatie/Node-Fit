@@ -16,6 +16,9 @@ export class CreateProfessorDTO {
 
 export class CreateAlunoDTO {
   @ApiProperty()
+  id?: number;
+
+  @ApiProperty()
   nomeCompleto: string;
 
   @ApiProperty()
