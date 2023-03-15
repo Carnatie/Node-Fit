@@ -1,0 +1,31 @@
+version: "3.1"
+services:
+  api:
+    container_name: nodefit-container
+    build: .
+    image: node-fit
+    restart: always
+    command: npm run start:prod
+    volumes:
+      - ./dist:/usr/src/node-fit/dist
+    ports:
+      - '3000:3000'
+    expose:
+      - 3000
+    links:
+     - mysql
+    env_file:
+      - .env.prod
+  mysql:
+    container_name: mysql-nodefit
+    image: mysql:8.0.32
+    restart: always
+    environment:
+      - MYSQL_DATABASE=nodefit
+      - MYSQL_ROOT_PASSWORD=Root
+    ports:
+      - '3306:3306'
+    expose:
+      - 3306
+    volumes:
+      - /var/lib/mysql
