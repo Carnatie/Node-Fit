@@ -29,33 +29,9 @@ model Aluno {
   updatedAt            DateTime  @updatedAt
   professor            Professor @relation(fields: [professorId], references: [id])
   professorId          Int
-  Treinos              Treino[]
   roles                Role      @default(Aluno)
 
   @@map("alunos")
-}
-
-model Treino {
-  id         Int @id @default(autoincrement())
-  objetivo   ObjetivoTreino
-  exercicios exercicio[]
-  createdAt  DateTime @default(now())
-  aluno      Aluno @relation(fields: [alunoId], references: [id])
-  alunoId    Int
-  
-  @@map("treinos")
-}
-
-model exercicio {
-  id Int @id @default(autoincrement())
-  nome String
-  series Int
-  repeticoes Int
-  tempoDeDescanso Int
-  treino Treino @relation(fields: [treinoId], references: [id])
-  treinoId Int
-
-  @@map("exercicios")
 }
 
 enum Role {
@@ -63,9 +39,3 @@ enum Role {
   Aluno
 }
 
-enum ObjetivoTreino {
-  Hipertrofia
-  Forca
-  Emagrecer
-  CondicionamentoFisico
-}
